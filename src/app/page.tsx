@@ -56,8 +56,8 @@ export default function Home() {
           onChange={textareaOnChange}
           name="content"
           id="t-con"
-          cols="100"
-          rows="20"
+          cols={100}
+          rows={20}
         />
       </label>
       <button onClick={submitForm}>提交</button>
