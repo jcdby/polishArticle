@@ -3,7 +3,7 @@ import { Configuration, CreateCompletionRequest, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
   organization: "org-QsBKAVPwUNFNK02FdBDOrSc8",
-  apiKey: "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",
+  apiKey: "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",
 });
 console.log(configuration);
 
