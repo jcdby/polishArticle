@@ -13,6 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const submitForm: MouseEventHandler = (e: MouseEvent<HTMLButtonElement>) => {
     setPolishedRes(["正在美化中，请稍等.......", ...polishedRes])
+    setIsSubmitting(true)
     const data = {
       promot: question,
       lan: language
@@ -39,7 +40,10 @@ export default function Home() {
       }).catch(e => {
         alert("遇到了一点点错误，请重新提交需要美化的文章")
         // setPolishedRes([...polishedRes.splice(0, 1)])
-    });
+      })
+      .finally(() => {
+        setIsSubmitting(false)
+      })
   };
 
   const textareaOnChange: ChangeEventHandler<HTMLTextAreaElement> = (
@@ -52,6 +56,7 @@ export default function Home() {
   const [question, setQuestion] = useState("");
   const [language, setLanguage] = useState("cn")
   const [polishedRes, setPolishedRes] = useState<string[]>([])
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
     <div className={"bg-slate-50"}>
@@ -75,7 +80,9 @@ export default function Home() {
           rows={10}
         />
         <div>
-          <button className={"w-24 bg-sky-500 rounded-lg h-8 mt-6 text-white"} onClick={submitForm}>提交</button>
+          <button
+            disabled={isSubmitting}
+            className={`w-24 bg-sky-500 rounded-lg h-8 mt-6 text-white ${isSubmitting ? "cursor-not-allowed bg-gray-500" : "cursor-default" }` } onClick={submitForm}>提交</button>
         </div>
         <div>{res}</div>
       </main>
